@@ -1,0 +1,70 @@
+// ============================================================
+// {{NAME}} · 站点总设置（site.json）
+// 每个字段的意思见 references/spec.md「site.json」；写不准时照抄 examples/huoqubing/story/site.json 的写法
+// 写着 TODO 的值都要换成真内容。剩下的 TODO 会被 check.py 报成 PLACEHOLDER 警告，交付前必须清零
+// 本文件允许写 // 注释，末尾多一个逗号也不要紧
+// ============================================================
+{
+  "title": "TODO标题",                              // 开场大字，2–8 个字：人物的名句、典故或一生的关键词
+  "subtitle": "TODO {{NAME}}的一生 · 三维考据地图",   // 开场副标题，一行
+  "span": "TODO 生年 — 卒年",                       // 例 "701 — 762"；公元前写 "公元前 140 — 前 117"
+  "motto": "TODO 一句原文",                         // 开场题句：人物自己的话或史书对他的评语，必须是原文
+  "mottoSrc": "《TODO》",                           // 题句出处，书名号
+  "seal": "{{SEAL}}",                               // 左上角印章，1–2 个字：字、号或封号
+  "kicker": "TODO 史料来源",                        // 开场小字，例 "史记 · 卫将军骠骑列传"
+  "pageTitle": "TODO标题 · {{NAME}}三维考据地图",     // 浏览器标签页标题
+  "description": "TODO 一句话介绍本图（分享卡片和搜索引擎用）",
+  "hero": {"name": "{{NAME}}", "flag": "{{FLAG}}", "legend": "{{NAME}}行迹"},   // 地图上行进标记的名字、旗上一个字、图例文字
+
+  // 势力：第一个是主角一方（暖色），第二个是对方（冷色）。演出里 side 写这里的 k。
+  // 没有对手的题材也留着第二个，人物页的分组、地图提示光圈都用得上
+  "factions": [
+    {"k": "me", "n": "{{NAME}}", "c": "#c8321e", "glow": "#ff6a48"},
+    {"k": "other", "n": "TODO 对方", "c": "#4678be", "glow": "#7fb6ff"}
+  ],
+  // 界面用词：go 行进按钮，story 经过页，rank 身份一栏，tab* 资料面板四个标签
+  "words": {"go": "行程", "story": "纪事", "rank": "身份", "tabReport": "纪事", "tabSources": "史料", "tabDebates": "考据", "tabPeople": "人物"},
+  // 支线类型的显示名（章节 side 里 k 的四种）
+  "sideNames": {"ally": "同行", "enemy": "对手", "lost": "失散", "flow": "迁徙"},
+
+  // 「全部路线」总览页
+  "overview": {
+    "num": "全",
+    "title": "TODO",                              // 例 "一生行迹"
+    "sub": "TODO 全部行程总览",
+    "span": "TODO 年份范围",
+    "lead": "TODO 总览导语，两三句（≤ 70 字），最后一句告诉读者点章节标签进入",
+    "list": "全部章节",
+    "col": "章",
+    "btn": "全部行程"
+  },
+  // 开场大数字，3–5 个。每个数字先记进 research/facts.md；v 写 "km" 时自动算全部路线公里数
+  "introStats": [
+    {"v": 0, "u": "岁", "l": "TODO 享年"},
+    {"v": "km", "u": "公里", "l": "全部行程"}
+  ],
+  // 古里折算（文字里 {li:a>b} 用）。汉里约 0.416，唐里约 0.53，宋里约 0.56，明清里约 0.576（公里）；用了就把依据记进 facts.md
+  // "li": {"name": "唐里", "km": 0.53},
+
+  // 两个版本对照表的表头（各章 variants 用）。没有异文就把各章 variants 写成 []
+  "variants": {"t": "版本异文", "a": "TODO 甲本", "b": "TODO 乙本"},
+  // 音效：进入章节、看全部路线、章末各放什么（能用的名字见 references/spec.md「音效」）
+  "cues": {"chapter": [[0.2, "bell"], [0.9, "qin"]], "all": [[0.1, "bell"]], "end": [[0.2, "bell"]]},
+  "layers": {"water": "水系 · 湖泊"},
+
+  // 「关于本图」三段：史料依据、路线怎么定的、演出是示意
+  "about": [
+    {"h": "史料", "p": "TODO 本图依据哪些书，异文怎么处理"},
+    {"h": "路线", "p": "TODO 古地名怎么定到今地，不确定的地方怎么标"},
+    {"h": "演出", "p": "TODO 场景演出是示意，人数、位置、时序按史文安排，不代表精确复原"}
+  ],
+  "credits": [
+    "地形：Mapzen Terrain Tiles（AWS Open Data，SRTM / GMTED / ETOPO1）",
+    "影像：Esri World Imagery（Esri, Maxar, Earthstar Geographics）",
+    "水系湖泊：Natural Earth 1:10m",
+    "史料：TODO 书目"
+  ]
+
+  // 文物卡（可选）：场景里写 "relic": "键名" 引用。写法：
+  // "relics": {"jian": {"t": "文物名", "d": "一句说明（≤ 60 字）"}}
+}

@@ -1,0 +1,71 @@
+{
+  "title": "封狼居胥",
+  "subtitle": "霍去病六出匈奴 · 三维考据地图",
+  "span": "公元前 140 — 前 117",
+  "motto": "匈奴未灭，无以家为也。",
+  "mottoSrc": "《史记·卫将军骠骑列传》",
+  "credits": [
+    "地形：Mapzen Terrain Tiles（AWS Open Data，SRTM / GMTED / ETOPO1）",
+    "影像：Esri World Imagery（Esri, Maxar, Earthstar Geographics）",
+    "水系湖泊：Natural Earth 1:10m；弱水、石羊河、湟水、洮水、庄浪河、籍端水、余吾水为据今河道手绘示意",
+    "史料：《史记》卷一一〇、一一一；《汉书》卷六、卷五十五、卷六十八；《资治通鉴》卷十九"
+  ],
+  "seal": "骠骑",
+  "kicker": "史记 · 卫将军骠骑列传",
+  "pageTitle": "封狼居胥 · 霍去病六出匈奴三维考据地图",
+  "description": "以《史记》《汉书》为据，在三维地形上复原霍去病漠南、焉支、祁连、受降、漠北五次远征的路线、战役与考据。",
+  "hero": {"name": "骠骑将军", "flag": "霍", "legend": "霍去病所部"},
+  "factions": [
+    {"k": "han", "n": "汉", "c": "#c8321e", "fo": 0.1, "glow": "#ff6a48", "line": "rgba(255,120,90,0.55)"},
+    {"k": "xn", "n": "匈奴", "c": "#4678be", "fo": 0.09, "glow": "#7fb6ff", "line": "rgba(140,190,255,0.5)"}
+  ],
+  "words": {
+    "go": "行军",
+    "story": "战报",
+    "rank": "官职",
+    "tabReport": "战报",
+    "tabSources": "史料",
+    "tabDebates": "考据",
+    "tabPeople": "人物"
+  },
+  "sideNames": {"ally": "友军", "enemy": "匈奴部众", "lost": "失道 · 失军", "flow": "降众安置"},
+  "overview": {
+    "num": "全",
+    "title": "六出匈奴",
+    "sub": "五次远征 · 路线总览",
+    "span": "前123 — 前119",
+    "lead": "漠南、焉支、祁连、受降、漠北，前后五年。霍去病从长安出发，西抵祁连山，北临翰海。点击地图上的章节标签或底部色带，进入任意一次远征。",
+    "list": "五次远征",
+    "col": "远征",
+    "btn": "五次远征全图"
+  },
+  "introStats": [
+    {"v": 6, "u": "出", "l": "出击匈奴"},
+    {"v": 110000, "u": "+", "l": "斩捕首虏"},
+    {"v": 24, "u": "岁", "l": "卒年"},
+    {"v": 15100, "u": "户", "l": "累计封户"},
+    {"v": "km", "u": "公里", "l": "五次远征路线"}
+  ],
+  "li": {"name": "汉里", "km": 0.4158},
+  "legend": {"walls": "长城 · 秦直道", "ancient": "汉代古湖（复原）"},
+  "variants": {"t": "两书异文", "a": "史记", "b": "汉书"},
+  "pulseSide": "xn",
+  "globe": {"c": [100, 34], "z": 1.7},
+  "cues": {"chapter": [[0.25, "drums"], [1.2, "horn"]], "all": [[0.1, "drums"]], "end": [[0.2, "bell"]]},
+  "layers": {"water": "水系 · 古湖", "wall": "长城 · 秦直道"},
+  "about": [
+    {"h": "史料", "p": "本图以《史记·卫将军骠骑列传》为骨，以《汉书·卫青霍去病传》《汉书·武帝纪》《史记·匈奴列传》《资治通鉴》补之。两书异文在每章「史料」页逐条对照。"},
+    {
+      "h": "路线",
+      "p": "史书只记地名与里数，不记道路。本图路线按「古地名 → 今地望」逐点定位，再沿河谷、垭口、水源连线；地望未定之处标注「约」「推测」，并在「考据」页列出各说候选点。汉里按 1 里 ≈ 415.8 米折算。"
+    },
+    {"h": "战役演出", "p": "战役中的兵力符号、箭雨、合围为示意性重演，人数按比例缩写，位置与时序依据史文叙述安排，用以帮助理解，不代表精确的战场复原。"}
+  ],
+  "relics": {
+    "jinren": {
+      "t": "休屠祭天金人",
+      "d": "休屠王部祭天所奉的金人像，此战为汉军所收。休屠王太子日磾后来因此被赐姓「金」。",
+      "svg": "<svg viewBox=\"0 0 54 72\"><defs><radialGradient id=\"jrg\" cx=\".5\" cy=\".35\" r=\".7\"><stop offset=\"0\" stop-color=\"#fff4c0\"/><stop offset=\".55\" stop-color=\"#e8b44c\"/><stop offset=\"1\" stop-color=\"#9a6a1c\"/></radialGradient></defs><circle cx=\"27\" cy=\"15\" r=\"13.5\" fill=\"none\" stroke=\"rgba(255,215,106,.35)\" stroke-dasharray=\"2 2.5\"/><circle cx=\"27\" cy=\"15\" r=\"6.8\" fill=\"url(#jrg)\"/><path d=\"M17.5 29.5Q27 23.5 36.5 29.5L38.5 51H33.5L32.5 68.5H21.5L20.5 51H15.5Z\" fill=\"url(#jrg)\"/><path d=\"M18 31L11 43.5M36 31L43 43.5\" stroke=\"#e2ae4a\" stroke-width=\"3.2\" stroke-linecap=\"round\"/><path d=\"M12 70H42\" stroke=\"rgba(255,215,106,.55)\" stroke-width=\"1.2\"/></svg>"
+    }
+  }
+}

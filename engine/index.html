@@ -1,0 +1,174 @@
+<!doctype html>
+<!-- 三维考据地图引擎 · 页面模板：双花括号占位由 scripts/build.py 按 story/site.json 填写，不要手改 dist 里的成品 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{PAGE_TITLE}}</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect x=%274%27 y=%274%27 width=%2756%27 height=%2756%27 rx=%276%27 fill=%27%23b3261a%27/%3E%3Cpath d=%27M18 46 L32 16 L46 46 M24 36 H40%27 stroke=%27%23f6e3bd%27 stroke-width=%275%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<meta name="description" content="{{DESCRIPTION}}">
+<link rel="stylesheet" href="vendor/maplibre-gl.css">
+<link rel="stylesheet" href="css/font.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="is-intro">
+
+<div id="map" aria-label="三维地形地图"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div id="overlay" aria-hidden="false"></div>
+<div id="grade" aria-hidden="true"><div class="g-haze"></div><div class="g-tint"></div><div class="g-vig"></div><div class="g-grain"></div><div class="g-moon"></div></div>
+<div id="letterbox" aria-hidden="true"><i class="lb-top"></i><i class="lb-bot"></i></div>
+
+<!-- 顶栏 -->
+<header id="topbar">
+  <button class="brand" id="brand" title="回到开场">
+    <span class="seal">{{SEAL}}</span>
+    <span class="brand-t"><strong>{{TITLE}}</strong><em>{{SUBTITLE}}</em></span>
+  </button>
+  <nav id="rail" aria-label="章节"></nav>
+  <div class="tools">
+    <button class="tool" id="btn-all" title="{{BTN_ALL}} (A)"><svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z M9 4v14 M15 6v14"/></svg><span>全图</span></button>
+    <button class="tool" id="btn-layers" title="图层 (L)"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z M3 13l9 5 9-5 M3 17.5l9 5 9-5"/></svg><span>图层</span></button>
+    <button class="tool" id="btn-sound" title="音效 (M)"><svg viewBox="0 0 24 24"><path class="spk" d="M4 9h4l5-4v14l-5-4H4z"/><path class="on" d="M16.5 8.5a5 5 0 010 7 M19 6a8.5 8.5 0 010 12"/><path class="off" d="M17 9l5 6 M22 9l-5 6"/></svg><span>音效</span></button>
+    <button class="tool" id="btn-about" title="出处与方法"><svg viewBox="0 0 24 24"><path d="M5 4h10l4 4v12H5z M15 4v4h4 M8 12h8 M8 16h6"/></svg><span>出处</span></button>
+  </div>
+</header>
+
+<!-- 左上 HUD -->
+<section id="hud" aria-label="读数">
+  <button id="compass" title="指北">
+    <svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" class="c-ring"/>
+      <circle cx="50" cy="50" r="38" class="c-ring2"/>
+      <g class="c-ticks"></g>
+      <g class="c-rose">
+        <path d="M50 10 L57 50 L50 46 L43 50 Z" class="c-n"/>
+        <path d="M50 90 L57 50 L50 54 L43 50 Z" class="c-s"/>
+        <text x="50" y="27" class="c-l">北</text>
+      </g>
+    </svg>
+  </button>
+  <div class="hud-read">
+    <div class="hr-row"><span class="hr-k">坐标</span><span class="hr-v" id="hud-ll">—</span></div>
+    <div class="hr-row"><span class="hr-k">海拔</span><span class="hr-v" id="hud-el">—</span></div>
+    <div class="hr-row"><span class="hr-k">行程</span><span class="hr-v" id="hud-km">—</span></div>
+    <div class="hr-row"><span class="hr-k">视角</span><span class="hr-v" id="hud-cam">—</span></div>
+  </div>
+</section>
+
+<!-- 图例 -->
+<section id="legend" aria-label="图例"></section>
+
+<!-- 右侧档案 -->
+<aside id="dossier" aria-label="章节档案">
+  <div class="dz-scroll" id="dz-scroll">
+    <div class="dz-head" id="dz-head"></div>
+    <nav class="dz-tabs" id="dz-tabs">
+      <button data-tab="report" class="on">经过</button>
+      <button data-tab="sources">史料</button>
+      <button data-tab="debates">考据</button>
+      <button data-tab="people">人物</button>
+    </nav>
+    <div class="dz-body" id="dz-body"></div>
+  </div>
+  <button id="dossier-toggle" title="收起 / 展开档案 (D)"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+</aside>
+
+<!-- 底部控制台 -->
+<section id="dock" aria-label="播放控制">
+  <button id="play" title="播放 / 暂停 (空格)">
+    <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" class="p-ring"/><path class="p-play" d="M19 15 L35 24 L19 33 Z"/><g class="p-pause"><rect x="16.5" y="15" width="5" height="18" rx="1"/><rect x="26.5" y="15" width="5" height="18" rx="1"/></g></svg>
+  </button>
+  <div class="dk-mid">
+    <div class="dk-top">
+      <span id="dk-cap" class="dk-cap">—</span>
+      <span id="dk-km" class="dk-km"></span>
+    </div>
+    <div id="profile-wrap"><svg id="profile" preserveAspectRatio="none"></svg><div id="pf-tip"></div></div>
+    <div id="tour-strip"></div>
+  </div>
+  <div class="dk-right">
+    <div class="seg" id="speed" title="速度">
+      <button data-v="1" class="on">1×</button><button data-v="2">2×</button><button data-v="4">4×</button>
+    </div>
+    <div class="seg" id="cam" title="镜头">
+      <button data-v="follow" class="on">跟随</button><button data-v="overview">全景</button><button data-v="free">自由</button>
+    </div>
+  </div>
+</section>
+
+<div id="caption" aria-live="polite"></div>
+<div id="toasts" aria-live="polite"></div>
+<div id="subtitle" aria-live="polite"></div>
+<section id="scene-card" aria-live="polite"></section>
+<section id="tour-card" aria-live="polite"></section>
+<section id="chapter-end"></section>
+<div id="titlecard" aria-hidden="true"></div>
+<div id="tip" role="tooltip"></div>
+
+<!-- 图层面板 -->
+<section id="layers-panel" aria-label="图层">
+  <h4>底图</h4>
+  <div class="seg wide" id="basemode"><button data-v="sat" class="on">卫星影像</button><button data-v="relief">舆图晕渲</button></div>
+  <h4>地形夸张</h4>
+  <div class="seg wide" id="exag"><button data-v="1">1.0×</button><button data-v="1.6" class="on">1.6×</button><button data-v="2.4">2.4×</button></div>
+  <h4>图层</h4>
+{{LAYER_ROWS}}
+  <label class="tg"><input type="checkbox" data-l="labels" checked><i></i>古地名注记</label>
+  <label class="tg"><input type="checkbox" data-l="modern" checked><i></i>今地名参照</label>
+  <label class="tg"><input type="checkbox" data-l="cands"><i></i>考据候选地点</label>
+  <label class="tg"><input type="checkbox" data-l="weather" checked><i></i>天气与粒子</label>
+</section>
+
+<!-- 开场 -->
+<section id="intro">
+  <div class="in-sky"></div>
+  <div class="in-inner">
+    <div class="in-kicker"><span>{{KICKER}}</span><i></i><span id="in-span"></span></div>
+    <h1 class="in-title {{TITLE_N}}">{{TITLE_SPANS}}</h1>
+    <p class="in-sub" id="in-sub"></p>
+    <blockquote class="in-motto"><p id="in-motto"></p><cite id="in-motto-src"></cite></blockquote>
+    <div class="in-stats" id="in-stats"></div>
+    <div class="in-btns">
+      <button id="enter-sound" class="btn-main"><svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 010 7 M19 6a8.5 8.5 0 010 12"/></svg>开启音效 · 进入</button>
+      <button id="enter-mute" class="btn-ghost">静默进入</button>
+    </div>
+    <p class="in-hint">建议使用电脑浏览器全屏观看 · 空格 播放/暂停 · ← → 切换章节</p>
+  </div>
+  <div class="in-load" id="in-load"><i></i><span>正在载入地形</span></div>
+</section>
+
+<!-- 出处 -->
+<section id="about" role="dialog" aria-label="出处与方法">
+  <div class="ab-card">
+    <button class="ab-x" id="about-x" title="关闭">×</button>
+    <h3>出处与方法</h3>
+    <div class="ab-grid">
+      <div>
+{{ABOUT}}
+      </div>
+      <div>
+        <h5>数据</h5>
+        <ul id="credits"></ul>
+        <h5>操作</h5>
+        <ul class="keys">
+          <li><kbd>空格</kbd>播放 / 暂停</li>
+          <li><kbd>←</kbd><kbd>→</kbd>上一章 / 下一章</li>
+          <li><kbd>A</kbd>{{BTN_ALL}}</li>
+          <li><kbd>D</kbd>收起档案</li>
+          <li><kbd>M</kbd>音效开关</li>
+          <li>右键拖动：旋转与俯仰视角</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="vendor/maplibre-gl.js"></script>
+<script src="data/geo.js"></script>
+<script src="js/data.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

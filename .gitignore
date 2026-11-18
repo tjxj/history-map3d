@@ -1,0 +1,13 @@
+# 生成物
+dist/
+qa/
+.wrangler/
+# 在仓库里直接做的项目
+projects/
+# 字体不进仓库（思源宋体自行下载放进 fonts/）
+fonts/*
+!fonts/README.md
+__pycache__/
+*.pyc
+.DS_Store
+node_modules/

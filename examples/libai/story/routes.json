@@ -1,0 +1,37 @@
+{
+  "shu1": {"via": ["zhangming", [104.62, 31.60], "kuangshan", [104.40, 31.30], [104.20, 30.95], "chengdu"], "note": "蜀中陆路：青莲乡—匡山—成都，成都平原"},
+  "shu2": {"via": ["chengdu", [103.90, 30.50], [103.55, 29.95], "emei"], "note": "成都南行至峨眉，岷江西岸丘陵"},
+  "shu3": {"via": ["emei", [103.50, 29.40], "qingxi"], "note": "峨眉至清溪驿，陆路"},
+  "shu4": {"via": ["qingxi", {"river": "岷江"}, [104.62, 28.79], {"river": "长江"}, "chongzhou"], "note": "清溪驿沿岷江至宜宾，入长江东下渝州，出蜀水路"},
+
+  "chu1": {"via": ["chongzhou", {"river": "长江"}, "baidicheng"], "note": "渝州溯江西上白帝城， prep 出峡"},
+  "chu2": {"via": ["baidicheng", {"river": "长江"}, "jingmen", {"river": "长江"}, "jiangling"], "note": "白帝城穿三峡下荆门，再东下江陵"},
+  "chu3": {"via": ["jiangling", [112.10, 30.10], [112.50, 29.60], "dongting"], "note": "江陵南行至洞庭，陆路"},
+  "chu4": {"via": ["dongting", [113.20, 30.30], [113.40, 30.80], "anlu"], "note": "洞庭北行至安陆"},
+  "chu5": {"via": ["anlu", [113.20, 31.80], [112.70, 32.00], "xiangyang"], "note": "安陆至襄阳"},
+  "chu6": {"via": ["xiangyang", {"river": "汉水"}, "echeng"], "note": "襄阳沿汉水南下鄂城"},
+
+  "lu1": {"via": ["taiyuan", [113.60, 37.90], [114.00, 37.60], [114.50, 37.00], [115.50, 36.30], "rencheng"], "note": "太原东越太行井陉至任城，河谷垭口"},
+  "lu2": {"via": ["rencheng", [117.00, 35.70], "culai"], "note": "任城至徂徕山"},
+  "lu3": {"via": ["culai", [117.35, 36.15], "taishan", [117.05, 36.55], "jinan"], "note": "徂徕山—泰山—齐州"},
+
+  "hanlin1": {"via": ["kuaiji", [119.00, 31.00], [117.50, 32.50], [115.50, 34.00], [113.50, 34.60], "luoyang", [110.90, 34.60], [110.20, 34.60], [109.50, 34.50], [109.10, 34.42], "changan"], "note": "会稽应诏西入长安，经江南淮南洛阳，沿渭河谷抵长安，避开华山山脊"},
+  "hanlin2": {"via": ["changan", [108.95, 34.15], "zhongnan"], "note": "长安南往终南山"},
+  "hanlin3": {"via": ["zhongnan", [108.95, 34.15], "changan"], "note": "终南山还长安，待诏翰林"},
+
+  "man1": {"via": ["changan", [109.60, 34.45], [110.50, 34.55], "luoyang"], "note": "出长安经潼关至洛阳"},
+  "man2": {"via": ["luoyang", [113.40, 34.70], "bianzhou", [115.00, 34.50], "liangyuan"], "note": "洛阳—汴州—梁宋"},
+  "man3": {"via": ["liangyuan", [115.80, 33.60], [116.50, 32.50], [117.20, 31.20], "qiupu"], "note": "梁宋南下皖南秋浦"},
+  "man4": {"via": ["qiupu", [118.10, 30.70], "jingting", [118.55, 30.80], "taohuatan"], "note": "秋浦—敬亭山—桃花潭"},
+
+  "nan1": {"via": ["lishan", [115.90, 29.65], "xunyang"], "note": "庐山北下寻阳"},
+  "nan2": {"via": ["xunyang", {"river": "长江"}, "pengze"], "note": "寻阳沿江东下彭泽，永王舟师"},
+  "nan3": {"via": ["pengze", {"river": "长江"}, [114.2964, 30.5869], [114.3032, 30.593], "wuchang"], "note": "彭泽西返江夏，系狱后流放溯江；中段跨长江两数据源接缝"},
+  "nan4": {"via": ["wuchang", {"river": "长江"}, "yueyang"], "note": "江夏溯江至岳阳，泛洞庭"},
+  "nan5": {"via": ["yueyang", {"river": "长江"}, [112.7818, 29.744], [112.7888, 29.744], {"river": "长江"}, "wushan"], "note": "岳阳溯长江西上三峡至巫山，遇赦于途；中段跨长江接缝"},
+
+  "dangtu1": {"via": ["yueyang", {"river": "长江"}, "wuchang"], "note": "赦后岳阳东下江夏"},
+  "dangtu2": {"via": ["wuchang", [114.2964, 30.5869], {"river": "长江"}, "jinling"], "note": "江夏沿江东下金陵；中段跨长江接缝"},
+  "dangtu3": {"via": ["jinling", {"river": "长江"}, "caishi"], "note": "金陵溯江至采石"},
+  "dangtu4": {"via": ["caishi", "dangtu", "qingshan"], "note": "采石—当涂—青山，终葬之地"}
+}
